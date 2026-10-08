@@ -1,6 +1,6 @@
 // 1.5. Найти все делители натурального числа N.
 function findDivisions(N) {
-    a = new Set();
+    const a = new Set();
     for (let i = 1; i < (N ** 0.5) + 1; i++) {
         if (N % i == 0) {
             a.add(i);
@@ -22,7 +22,7 @@ function getSumDigits(X) {
 
 function findAllNumberSumDigits(N, M) {
     const arr = [];
-    for (let i = N; i < M; i++) {
+    for (let i = N; i <= M; i++) {
         if (i % getSumDigits(i) == 0) {
             arr.push(i)
         }
@@ -53,12 +53,12 @@ function sieveOfEratosthenes(N) {
 // 1.2. Составить программу, проверяющую, будет ли простым данное натуральное число.
 let N = 123;
 const is_prime = sieveOfEratosthenes(N + 1);
-// if (N in is_prime) {
-//     console.log('yes');
-// }
-// else {
-//     console.log('no');
-// }
+if (is_prime[N] == true) {
+    console.log('yes');
+}
+else {
+    console.log('no');
+}
 
 // 1.7.  Натуральное число называется совершенным, если оно равно сумме всех
 // своих делителей, включая единицу. Вывести первые N (N<5) совершенных
@@ -104,11 +104,3 @@ for (let i = 2; counter < amount; i++) {
         counter++;
     }
 }
-
-
-
-
-    
-
-
-
