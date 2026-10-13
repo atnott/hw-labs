@@ -82,3 +82,52 @@ copyUsers.manager = 'jack';
 
 console.log(users.toString())
 console.log(copyUsers.toString())
+
+
+// 2.6.  Создайте объект "предметы", со свойством, в котором через запятую перечислены предметы, 
+// преподаваемые в университете/школе (перечислите 2-6). 
+// Напишите к нему метод, который будет добавлять предмет, если его еще там нет. 
+// Используйте для этого преобразование в массив и свойства массивов split, join, push. 
+// Создайте метод для удаления предмета, если он уже там есть, с помощью свойства splice.
+
+const lessons  = {
+    all_lessons: 'математика, физика, русский, химия, физра, обж',
+    add_new_lesson(new_lesson) {
+        const array_lessons = this.all_lessons.split(', ');
+        if (!(array_lessons.includes(new_lesson))) {
+            array_lessons.push(new_lesson);
+            this.all_lessons = array_lessons.join(', ');
+        }
+    },
+    delete_lesson(lesson) {
+        const array_lessons = this.all_lessons.split(', ');
+        if (array_lessons.includes(lesson)) {
+            let index_for_delete = array_lessons.indexOf(lesson);
+            array_lessons.splice(index_for_delete, 1);
+            this.all_lessons = array_lessons.join(', ');
+        }
+    }
+}
+
+
+// 2.3. Используя ассоциативный массив, создайте функцию для перевода заданной строки 
+// на необходимый язык. Переводимые слова и фразы ограничены 
+// заданным набором (для примера 4 слова).
+
+const translate = {
+    make: 'создайте',
+    function: 'функцию',
+    for: 'для',
+    translate: 'перевода'
+}
+
+function fromRussianToEnglish(string) {
+    let result = '';
+    const array_string = string.split(' ');
+    for (let word of array_string) {
+        if (word in translate) {
+            result += translate[word] + ' ';
+        }
+    }
+    return result.trim();
+}
