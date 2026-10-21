@@ -1,5 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
 table {
-    width: 70%;
     border-collapse: collapse;
     text-align: center;
 }
@@ -8,4 +17,12 @@ table th,
 table td {
     padding: 12px 15px;
     border: 1px solid #dddddd;
+}
+
+#table-container-1 table {
+    width: auto;
+}
+
+.mark {
+    background-color: #dddddd;
 }
