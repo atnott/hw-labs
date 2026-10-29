@@ -1,7 +1,5 @@
-create sequence id_film;
-
 create table films (
-    id int default nextval('id_film') primary key,
+    id int auto_increment primary key,
     title varchar(100) not null,
     release_year int,
     director varchar(100),
