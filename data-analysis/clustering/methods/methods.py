@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.cluster import Birch, KMeans, DBSCAN, AgglomerativeClustering
+from sklearn.mixture import GaussianMixture
 from .base import BaseClusterMethod
 
 class KMeansMethod(BaseClusterMethod):
@@ -80,3 +81,24 @@ class BirchMethod(BaseClusterMethod):
                     metrics=metrics, 
                     current_params=current_params
                 )
+
+class GaussianMixtureMethod(BaseClusterMethod):
+
+    def check_metrics(self, X):
+        for n_comp in range(2, 6):
+            for cov in ['full', 'spherical', 'diag']:
+
+                current_params = dict(n_components=n_comp, covariance_type=cov, random_state=42)
+
+                model = Birch(**current_params).fit(X)
+                labels = model.labels_
+
+                score, metrics = self.evaluate(X, labels)
+
+                self.update_score(
+                    score=score, 
+                    labels=labels,
+                    metrics=metrics, 
+                    current_params=current_params
+                )
+                
