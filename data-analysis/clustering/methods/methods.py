@@ -90,8 +90,8 @@ class GaussianMixtureMethod(BaseClusterMethod):
 
                 current_params = dict(n_components=n_comp, covariance_type=cov, random_state=42)
 
-                model = Birch(**current_params).fit(X)
-                labels = model.labels_
+                model = GaussianMixture(**current_params).fit(X)
+                labels = model.predict(X)
 
                 score, metrics = self.evaluate(X, labels)
 
@@ -101,4 +101,3 @@ class GaussianMixtureMethod(BaseClusterMethod):
                     metrics=metrics, 
                     current_params=current_params
                 )
-                

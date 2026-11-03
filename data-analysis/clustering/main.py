@@ -4,15 +4,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 from sklearn.preprocessing import StandardScaler
-from methods.methods import KMeansMethod, DBSCANMethod, AgglomerativeMethod, BirchMethod
+from methods.methods import KMeansMethod, DBSCANMethod, AgglomerativeMethod, BirchMethod, GaussianMixtureMethod
+
+current_dir = Path(__file__).resolve().parent
 
 class ClusteringPipeline:
     def __init__(self, output_dir: str = 'clustering_results') -> None:
-        self.output_dir = output_dir
+
+        self.output_dir = current_dir / 'clustering_results'
         self.X = None
 
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def get_X_from_file(self, file_path: str):
         with open(file_path) as file:
@@ -29,7 +31,8 @@ class ClusteringPipeline:
             'kmeans': KMeansMethod(),
             'dbskan': DBSCANMethod(),
             'agglomerative': AgglomerativeMethod(),
-            'birch': BirchMethod()
+            'birch': BirchMethod(),
+            'gaussian_mixture': GaussianMixtureMethod()
         }
 
         for name, method in methods.items():
@@ -55,17 +58,16 @@ class ClusteringPipeline:
         plt.title(title_text, fontsize=9)
 
         file_name = Path(file_path).name
-        save_path = os.path.join(self.output_dir, f'result_{file_name}.png')
-        plt.savefig(save_path, bbox_inches='tight', dpi=150)
-        print('ok')
-
-        plt.show()
-
+        save_path = self.output_dir / f'result_{file_name}.png'
+        plt.savefig(save_path)
+        
 if __name__ == '__main__':
 
     test = ClusteringPipeline()
 
-    current_dir = Path(__file__).resolve().parent
-    file_path = str(current_dir / '20230328-alDhafra')
-
-    test.save_to_file(file_path)
+    data_dir = current_dir / '2test'
+    data_files = [str(file) for file in data_dir.iterdir() if file.is_file()]
+    # file_path = str(current_dir / '20230328-alDhafra')
+    for file_path in data_files:
+        test.save_to_file(file_path)
+        print('ok')
