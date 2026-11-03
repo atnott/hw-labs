@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn.cluster import KMeans, DBSCAN
+from sklearn.cluster import Birch, KMeans, DBSCAN, AgglomerativeClustering
 from .base import BaseClusterMethod
 
 class KMeansMethod(BaseClusterMethod):
@@ -41,3 +41,42 @@ class DBSCANMethod(BaseClusterMethod):
                     current_params=current_params
                 )
 
+class AgglomerativeMethod(BaseClusterMethod):
+
+    def check_metrics(self, X):
+        for k in range(2, 6):
+            for link in ['ward', 'complete', 'average']:
+
+                current_params = dict(n_clusters=k, linkage=link)
+
+                model = AgglomerativeClustering(**current_params).fit(X)
+                labels = model.labels_
+
+                score, metrics = self.evaluate(X, labels)
+
+                self.update_score(
+                    score=score, 
+                    labels=labels,
+                    metrics=metrics, 
+                    current_params=current_params
+                )
+
+class BirchMethod(BaseClusterMethod):
+
+    def check_metrics(self, X):
+        for k in range(2, 6):
+            for threshold in [0.3, 0.5, 0.7]:
+
+                current_params = dict(n_clusters=k, threshold=threshold)
+
+                model = Birch(**current_params).fit(X)
+                labels = model.labels_
+
+                score, metrics = self.evaluate(X, labels)
+
+                self.update_score(
+                    score=score, 
+                    labels=labels,
+                    metrics=metrics, 
+                    current_params=current_params
+                )
