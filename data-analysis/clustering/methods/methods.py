@@ -8,8 +8,8 @@ class KMeansMethod(BaseClusterMethod):
 
             current_params = {'n_clusters': k, 'random_state': 42}
 
-            model = KMeans(**current_params)
-            labels = model.fit(X)
+            model = KMeans(**current_params).fit(X)
+            labels = model.labels_
 
             score, metrics = self.evaluate(X, labels)
 
