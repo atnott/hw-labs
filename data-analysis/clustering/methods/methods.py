@@ -1,4 +1,5 @@
-from sklearn.cluster import KMeans
+import numpy as np
+from sklearn.cluster import KMeans, DBSCAN
 from .base import BaseClusterMethod
 
 class KMeansMethod(BaseClusterMethod):
@@ -13,8 +14,30 @@ class KMeansMethod(BaseClusterMethod):
 
             score, metrics = self.evaluate(X, labels)
 
-            if score > self.best_score:
-                self.best_score = score
-                self.best_labels = labels
-                self.best_metrics_summary = metrics
-                self.best_params = current_params
+            self.update_score(
+                    score=score, 
+                    labels=labels,
+                    metrics=metrics, 
+                    current_params=current_params
+            )
+
+class DBSCANMethod(BaseClusterMethod):
+
+    def check_metrics(self, X):
+        for eps in np.arange(0.1, 1.1, 0.1):
+            for min_samples in range(3, 20):
+                
+                current_params = {'eps': float(eps), 'min_samples': min_samples}
+
+                model = DBSCAN(**current_params).fit(X)
+                labels = model.labels_
+
+                score, metrics = self.evaluate(X, labels)
+
+                self.update_score(
+                    score=score, 
+                    labels=labels,
+                    metrics=metrics, 
+                    current_params=current_params
+                )
+

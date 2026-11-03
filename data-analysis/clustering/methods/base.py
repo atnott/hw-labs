@@ -44,3 +44,10 @@ class BaseClusterMethod:
         }
 
         return np.dot(norm_list, weights), metrics_summary
+
+    def update_score(self, score, labels, metrics, current_params):
+        if score > self.best_score:
+            self.best_score = score
+            self.best_labels = labels
+            self.best_metrics_summary = metrics
+            self.best_params = current_params
