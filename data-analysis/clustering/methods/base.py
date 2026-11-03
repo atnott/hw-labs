@@ -23,8 +23,8 @@ class BaseClusterMethod:
         calinski_harabasz = calinski_harabasz_score(X, labels)
         noise_ratio = np.sum(labels == -1) / len(labels)
 
-        cnt = np.bincount(labels[labels != -1])
-        balance = np.min(cnt) / np.max(cnt)
+        _, counts = np.unique(labels[labels != -1], return_counts=True)
+        balance = float(np.min(counts) / np.max(counts)) if len(counts) > 0 else 0.0
 
         norm_silhouette = (silhouette + 1) / 2
         norm_davies_bouldin = 1 / (1 + davies_bouldin)
