@@ -15,7 +15,7 @@ class BaseClusterMethod:
     def evaluate(self, X, labels) -> dict[str, float]:
         n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
 
-        if n_clusters == 1 or n_clusters >= len(X) - 1:
+        if n_clusters < 2 or n_clusters >= len(X) - 1:
             return -999, {}
 
         silhouette = silhouette_score(X, labels)
@@ -36,16 +36,20 @@ class BaseClusterMethod:
         weights = [0.4, 0.2, 0.1, 0.1, 0.2]
 
         metrics_summary = {
-            'silhouette': silhouette,
-            'davies_bouldin': davies_bouldin,
-            'calinski': calinski_harabasz,
-            'noise_ratio': noise_ratio,
-            'balance': balance
+            'silhouette': round(silhouette, 3),
+            'davies_bouldin': round(davies_bouldin, 3),
+            'calinski': round(calinski_harabasz, 3),
+            'noise_ratio': round(noise_ratio, 3),
+            'balance': round(balance, 3)
         }
 
         return np.dot(norm_list, weights), metrics_summary
 
     def update_score(self, score, labels, metrics, current_params):
+
+        if score == -999:
+            return
+
         if score > self.best_score:
             self.best_score = score
             self.best_labels = labels
