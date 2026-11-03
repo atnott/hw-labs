@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
+from concurrent.futures import ProcessPoolExecutor
 from sklearn.preprocessing import StandardScaler
 from methods.methods import KMeansMethod, DBSCANMethod, AgglomerativeMethod, BirchMethod, GaussianMixtureMethod
 
@@ -60,14 +61,14 @@ class ClusteringPipeline:
         file_name = Path(file_path).name
         save_path = self.output_dir / f'result_{file_name}.png'
         plt.savefig(save_path)
-        
+        plt.close()
+
 if __name__ == '__main__':
 
     test = ClusteringPipeline()
 
     data_dir = current_dir / '2test'
     data_files = [str(file) for file in data_dir.iterdir() if file.is_file()]
-    # file_path = str(current_dir / '20230328-alDhafra')
-    for file_path in data_files:
-        test.save_to_file(file_path)
-        print('ok')
+
+    with ProcessPoolExecutor(max_workers=4) as executor:
+        executor.map(test.save_to_file, data_files)
