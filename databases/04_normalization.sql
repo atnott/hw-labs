@@ -26,3 +26,6 @@ create table if not exists customers (
 
 insert into customers (customer_id, customer_address)
 select distinct customer_id, customer_address from projects;
+
+alter table projects
+drop column customer_address;
