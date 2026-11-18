@@ -29,3 +29,7 @@ select distinct customer_id, customer_address from projects;
 
 alter table projects
 drop column customer_address;
+
+alter table projects
+add constraint fk_customer
+foreign key (customer_id) references customers(customer_id);
