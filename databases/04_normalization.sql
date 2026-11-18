@@ -24,7 +24,3 @@ create table if not exists customers (
     customer_address varchar(255) not null
 );
 
-insert into customers values
-(141, 'moscow'),
-(142, 'irkutsk'),
-(143, 'sochi');
