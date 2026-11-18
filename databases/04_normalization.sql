@@ -24,3 +24,5 @@ create table if not exists customers (
     customer_address varchar(255) not null
 );
 
+insert into customers (customer_id, customer_address)
+select distinct customer_id, customer_address from projects;
