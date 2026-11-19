@@ -33,3 +33,25 @@ select id, name, lastname,
 from clients
 where dbirth <= '2024-07-15'
 limit 10;
+
+-- 4. Найдите клиентов, у которых планируется день рождения: 
+-- а) в ближайшую неделю, 
+select * from clients
+where
+    date_add(dbirth, interval year(curdate()) - year(dbirth) year)
+    between curdate() and curdate() + interval 1 week
+limit 10;
+
+-- б) в ближайшие две недели, 
+select * from clients
+where
+    date_add(dbirth, interval year(curdate()) - year(dbirth) year)
+    between curdate() and curdate() + interval 2 week
+limit 10;
+
+-- в) до конца текущего месяца;
+select * from clients
+where
+    date_add(dbirth, interval year(curdate()) - year(dbirth) year)
+    between curdate() and last_day(curdate())
+limit 10;
