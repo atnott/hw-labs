@@ -16,3 +16,15 @@ select concat_ws(' ', name, lastname) as full_name,
 concat_ws(repeat('*', length(phone) - 4), substring(phone, 1, 3), right(phone, 1)) as phone_number
 from clients 
 limit 10;
+
+-- 3) Выведите по каждому клиенту, в фамилии которого есть такие вхождения строк tt, ss, ll, 
+-- имя и фамилию приведите к формату, где имя будет сокращено до 1 символа с точкой 
+-- (например: J. Wiliams).
+
+select id, dbirth, gender, phone,
+concat_ws('. ', left(name, 1), lastname) as fullnam
+from clients
+where instr(lastname, 'tt') != 0
+    or instr(lastname, 'ss') != 0
+    or instr(lastname, 'll') != 0
+limit 10;
