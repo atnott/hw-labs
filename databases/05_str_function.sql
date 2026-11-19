@@ -51,3 +51,21 @@ where substring(phone, 1, 3) = '586';
 
 select * from clients
 where phone regexp '^586';
+
+-- б) содержат 657,
+select * from clients
+where instr(phone, '657') != 0;
+
+select * from clients
+where locate('657', phone) != 0;
+
+select * from clients
+where position('657' in phone) != 0;
+
+select * from clients
+where phone like '%657%';
+
+select * from clients
+where phone regexp '[1-9]*(657)[1-9]*';
+
+-- в) заканчиваются на 707
