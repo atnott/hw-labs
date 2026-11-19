@@ -37,6 +37,11 @@ applyButton.addEventListener('click', function() {
     const phone = document.getElementById('phone').value;
     const email = document.getElementById('email').value;
     const address = document.getElementById('address').value;
+    const showEmail = document.getElementById('show-email').checked;
+    const showAddress = document.getElementById('show-address').checked;
+
+    const cardEmail = document.getElementById('card-email');
+    const cardAddress = document.getElementById('card-address');
     
     if (org) document.getElementById('card-org').textContent = org;
     if (fio) document.getElementById('card-fio').textContent = fio;
@@ -44,6 +49,22 @@ applyButton.addEventListener('click', function() {
     if (phone) document.getElementById('card-phone').textContent = phone;
     if (email) document.getElementById('card-email').textContent = email;
     if (address) document.getElementById('card-address').textContent = address;
+
+    if (showEmail && email) {
+        cardEmail.textContent = email;
+        cardEmail.style.display = 'block';
+    } 
+    else {
+        cardEmail.style.display = 'none';
+    }
+    
+    if (showAddress && address) {
+        cardAddress.textContent = address;
+        cardAddress.style.display = 'block';
+    } 
+    else {
+        cardAddress.style.display = 'none';
+    }
     
     const fioAlign = document.querySelector('.align-group[data-target="fio"] .ctrl-btn.active').dataset.value;
     const fioSize = document.querySelector('.size-group[data-target="fio"] .ctrl-btn.active').dataset.value;
