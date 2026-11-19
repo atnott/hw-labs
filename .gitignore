@@ -773,3 +773,5 @@ FodyWeavers.xsd
 # Папка исходников фронтенда: питоновский шаблон выше игнорирует любые lib/
 !frontend/src/shared/lib/
 !frontend/src/shared/lib/**
+
+ai/runrime
