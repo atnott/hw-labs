@@ -28,3 +28,26 @@ where instr(lastname, 'tt') != 0
     or instr(lastname, 'ss') != 0
     or instr(lastname, 'll') != 0
 limit 10;
+
+-- 4. Найдите все записи, в которых телефонные номера:
+-- а) начинаются на 586
+select * from clients
+where instr(phone, '586') = 1;
+
+select * from clients
+where locate('586', phone) = 1;
+
+select * from clients
+where position('586' in phone) = 1;
+
+select * from clients
+where phone like '586%';
+
+select * from clients
+where left(phone, 3) = '586';
+
+select * from clients
+where substring(phone, 1, 3) = '586';
+
+select * from clients
+where phone regexp '^586';
