@@ -69,3 +69,23 @@ select * from clients
 where phone regexp '[1-9]*(657)[1-9]*';
 
 -- в) заканчиваются на 707
+select * from clients
+where instr(phone, '707') = length(phone) - 2;
+
+select * from clients
+where locate('707', phone) = length(phone) - 2;
+
+select * from clients
+where position('707' in phone) = length(phone) - 2;
+
+select * from clients
+where phone like '%707';
+
+select * from clients
+where right(phone, 3) = '707';
+
+select * from clients
+where substring(phone, length(phone) - 2, 3) = '707';
+
+select * from clients
+where reverse(phone) regexp '^707';
