@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e5e5e5; 
+    padding: 40px;
+}
+
+.container {
+    display: flex;
+    gap: 50px;
+}
+
+.left-part {
+    flex: 1;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.left-part h2 {
+    margin-top: 0;
+}
+
+.left-part > div {
+    margin-bottom: 16px;
+}
+
+.left-part label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #333;
+}
+
+.left-part input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#apply {
+    background-color: #5b8def;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#apply:hover {
+    background-color: #4a7de0;
+}
+
+.preview-part {
+    flex: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start;
+    padding-top: 20px;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 380px;
+    text-align: center;
+}
+
+.card h4 {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.card h1 {
+    margin: 0 0 10px 0;
+    font-size: 26px;
+    color: #222;
+}
+
+
+.card h3 {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    color: #555;
+    font-weight: normal;
+}
+
+.card h5 {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+    font-weight: normal;
+    text-align: right; 
+}
