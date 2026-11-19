@@ -47,8 +47,6 @@ applyButton.addEventListener('click', function() {
     if (fio) document.getElementById('card-fio').textContent = fio;
     if (position) document.getElementById('card-position').textContent = position;
     if (phone) document.getElementById('card-phone').textContent = phone;
-    if (email) document.getElementById('card-email').textContent = email;
-    if (address) document.getElementById('card-address').textContent = address;
 
     if (showEmail && email) {
         cardEmail.textContent = email;
